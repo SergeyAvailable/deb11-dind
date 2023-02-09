@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-FILE=/var/run/docker.sock
-    if test -f $FILE ; then
-    exec sleep infinity
-else
-    dockerd
+/var/run/docker.sock 2> /dev/null
+if [ $? == 126 ] 
+    then
+      exec sleep infinity
+    else
+      dockerd
 fi
